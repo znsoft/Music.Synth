@@ -2,6 +2,8 @@
 * text=auto
 
 # Custom for Visual Studio
+*.c      diff=c99
+*.h      diff=c99
 *.cs     diff=csharp
 *.sln    merge=union
 *.csproj merge=union
