@@ -25,19 +25,19 @@ INCLUDE = $(PellesCDir)\Include\Win;$(PellesCDir)\Include#
 LIB = $(PellesCDir)\Lib\Win;$(PellesCDir)\Lib#
 
 # 
-# Build keyjazzpc.exe.
+# Build keyjazzPC.exe.
 # 
-keyjazzpc.exe: \
-	keyj.obj
+keyjazzPC.exe: \
+	output\main.obj
 	$(LINK) $(LINKFLAGS) -out:"$@" $**
 
 # 
-# Build keyj.obj.
+# Build main.obj.
 # 
-keyj.obj: \
+output\main.obj: \
 	main.c
 	$(CC) $(CCFLAGS) "$!" -Fo"$@"
 
-.EXCLUDEDFILES:
-
 .SILENT:
+
+.EXCLUDEDFILES:

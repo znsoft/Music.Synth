@@ -4,7 +4,7 @@
 # 
 
 POC_PROJECT_VERSION = 6.50#
-POC_PROJECT_TYPE = 7#
+POC_PROJECT_TYPE = 4#
 POC_PROJECT_OUTPUTDIR = output#
 POC_PROJECT_RESULTDIR = .#
 POC_PROJECT_ARGUMENTS = #
@@ -15,15 +15,14 @@ AS = poasm.exe#
 RC = porc.exe#
 LINK = polink.exe#
 SIGN = posign.exe#
-DEL = del#
-CCFLAGS = -Tarm-coff -Ot -W0 -Gz -Ze -D_WINCE -D_WINCE_SMARTPHONE -DUNICODE #
+CCFLAGS = -Tarm-coff -Ot -Ob0 -fp:fast -W0 -Gz -Ze -J -D_WINCE -DUNICODE #
 ASFLAGS = -AARM -Gz #
-RCFLAGS = -D_WINCE -D_WINCE_SMARTPHONE #
-LINKFLAGS = -subsystem:windowsce,3.0 -machine:arm  aygshell.lib coredll.lib corelibc.lib#
-WizCreator = zn-soft.narod.ru#
+RCFLAGS = -D_WINCE #
+LINKFLAGS = -subsystem:windowsce,4.10 -machine:arm aygshell.lib coredll.lib corelibc.lib#
 SIGNFLAGS = -timeurl:http://timestamp.verisign.com/scripts/timstamp.dll -location:CU -store:MY -errkill#
 INCLUDE = $(PellesCDir)\Include\WinCE;$(PellesCDir)\Include#
 LIB = $(PellesCDir)\Lib\WinCE;$(PellesCDir)\Lib#
+WizCreator = Pelle Orinius#
 
 keyjazzWinCE.exe: \
 	output\main.obj 
@@ -33,6 +32,7 @@ output\main.obj: \
 	main.c \
 	"..\..\..\Program Files (x86)\PellesC\Include\WinCE\winsock.h"
 	$(CC) $(CCFLAGS) "$!" -Fo"$@"
+
 
 .EXCLUDEDFILES:
 
