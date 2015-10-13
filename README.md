@@ -1,10 +1,10 @@
 Music.Synth
 ===========
 
-My Very Old (2002-2003) music tracker and syntezer
+My Very Old (2002-2003) music tracker.  
 first this was compiled with GCC but them it compiled with PellesC
 
-it initial writing/editing on the phone motorolla mpx200 and now its editiong on pc 
+it initial writing/editing on the phone motorolla mpx200 and now its editing on pc 
 
 instruction is included in .jpg file
 
