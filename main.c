@@ -43,12 +43,12 @@ unsigned char bpm;
 int tx, ty, version = 4;
 char interpolation = 1;
 #define maxsqy 255
-char seq[maxsqy][maxsqy];	//трэки каналы , дорожки , последовательность паттернов.
+char seq[maxsqy][maxsqy];	//С‚СЂСЌРєРё РєР°РЅР°Р»С‹ , РґРѕСЂРѕР¶РєРё , РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚СЊ РїР°С‚С‚РµСЂРЅРѕРІ.
 struct charsnames {
 	char p[16];
 	wchar_t nme[20];
 	short color;
-} tmpins[255], instr[255], patterns[255];	//список инструментов , паттернов
+} tmpins[255], instr[255], patterns[255];	//СЃРїРёСЃРѕРє РёРЅСЃС‚СЂСѓРјРµРЅС‚РѕРІ , РїР°С‚С‚РµСЂРЅРѕРІ
 struct sample {
 	short *s;
 	long l;
@@ -64,7 +64,7 @@ int maxpatnames, notenum, maxseq = 1, maxtrack;
 wchar_t filelist[100][160];
 int maxfilelist, patviewmode;
 wchar_t editfile[255];
-char editpattern = 0;	//редактируемый паттерн
+char editpattern = 0;	//СЂРµРґР°РєС‚РёСЂСѓРµРјС‹Р№ РїР°С‚С‚РµСЂРЅ
 struct buffers {
 	char *bf;
 } bf[numofbuf];	// audio buffers
@@ -74,7 +74,8 @@ struct mnu {
 {
 L" ", L"samples", L"scope", L"file", L"instruments", L"pattern", L"sequence"}, filemenu[] =
 {
-L"Exit", L"Load", L"Save", L"SaveAs", L"Export .wav", L"New", L"Merge", L"export .h", L"Random", L"export .mid", L"import .mid", L"pat view", L"samplerate", L"BPM"}, rndmnu[] =
+L"Exit", L"Load", L"Save", L"SaveAs", L"Export .wav", L"New", L"Merge", L"export .h", L"Random", L"export .mid", L"import .mid", L"pat view", L"samplerate", L"BPM"}, 
+rndmnu[] =
 {
 L"type", L"note", L"width", L"numofpat", L"pauses", L"seed", L"minnotelen", L"repeat", L"random"};	// main menu
 int filemcnt = sizeof(filemenu) / sizeof(filemenu[0]);
@@ -104,7 +105,7 @@ int paternnotes[100];
 int patx[100];
 const int maxnotepat = 16;
 const int notincol = 4;
-int sx, sy;	//размеры экрана -------------ниже "экранные" переменные 
+int sx, sy;	//СЂР°Р·РјРµСЂС‹ СЌРєСЂР°РЅР° -------------РЅРёР¶Рµ "СЌРєСЂР°РЅРЅС‹Рµ" РїРµСЂРµРјРµРЅРЅС‹Рµ 
 BITMAP rDIB;
 BYTE *dstDIBBits;
 HDC hdcMem;
@@ -1264,7 +1265,7 @@ void drawscope(int x, int y, int amp)
 	scope += sx * 2;
 }
 //=============
-//--------------------------------------------------пианино------------------------------------------------клавиатура---------------------
+//--------------------------------------------------РїРёР°РЅРёРЅРѕ------------------------------------------------РєР»Р°РІРёР°С‚СѓСЂР°---------------------
 void movenotes(int e, int n)
 {
 	int i;
@@ -1479,7 +1480,7 @@ void drawboxmenu(int width, int num)
 	memset(dstDIBBits, 0, z * dstRowBytes);
 }
 //----------------------------
-//--------------------------------------------------выбор --------------------------------
+//--------------------------------------------------РІС‹Р±РѕСЂ --------------------------------
 void drawtab(struct charsnames *in, int maxnames, _Bool more)
 {	//listbox
 	int y, o = taboffset, b = (sy - 15 * 2) / 16;
@@ -1533,7 +1534,7 @@ void drawtab(struct charsnames *in, int maxnames, _Bool more)
 	taboffset = o;
 }
 //---------------------------------------
-//--------------------------------------------------список инструментов --------------------------------
+//--------------------------------------------------СЃРїРёСЃРѕРє РёРЅСЃС‚СЂСѓРјРµРЅС‚РѕРІ --------------------------------
 void drawinstrs(MSG m)
 {	//listbox
 	cls(253);
@@ -1575,7 +1576,7 @@ void drawinstrs(MSG m)
 	fire = false;
 }
 //---------------------------------------
-//--------------------------------------------------список паттернов --------------------------------
+//--------------------------------------------------СЃРїРёСЃРѕРє РїР°С‚С‚РµСЂРЅРѕРІ --------------------------------
 void drawsheet(MSG m)
 {	//listbox
 	cls(250);
@@ -1638,7 +1639,7 @@ void movesqup(int x, int y)
 		seq[i][x] = seq[i + 1][x];
 	seq[maxseq][x] = 0;
 }
-//------------------------------------основной список и расстановка паттернов--------------------------
+//------------------------------------РѕСЃРЅРѕРІРЅРѕР№ СЃРїРёСЃРѕРє Рё СЂР°СЃСЃС‚Р°РЅРѕРІРєР° РїР°С‚С‚РµСЂРЅРѕРІ--------------------------
 
 void drawseq(MSG m)
 {
@@ -1731,7 +1732,7 @@ void drawseq(MSG m)
 	}
 	fire = false;
 }
-//--------------------------------------------------список samples --------------------------------
+//--------------------------------------------------СЃРїРёСЃРѕРє samples --------------------------------
 void drawsmp(MSG m)
 {	//listbox
 	cls(253);
@@ -1819,7 +1820,7 @@ void drawsmp(MSG m)
 	fire = false;
 }
 //---------------------------------------
-//-----------------------------------------------редактор инструмента--- изменяемые параметры---------------
+//-----------------------------------------------СЂРµРґР°РєС‚РѕСЂ РёРЅСЃС‚СЂСѓРјРµРЅС‚Р°--- РёР·РјРµРЅСЏРµРјС‹Рµ РїР°СЂР°РјРµС‚СЂС‹---------------
 //---------------
 _Bool paramsign = false;
 int xtmp = 0;
@@ -1843,7 +1844,7 @@ void drawparams(void)
 		gx = 0;
 	if (abs(gx) > 5)
 		gx = xtmp;
-	xtmp = gx;	// ускорение
+	xtmp = gx;	// СѓСЃРєРѕСЂРµРЅРёРµ
 	paramsign = instr[editinstr].p[i] < 0;
 	lev = abs(instr[editinstr].p[i]);
 	if (fire)
@@ -1911,7 +1912,7 @@ void drawparams(void)
 	print(txt, sx / 2 - 8 * 4, sy - 14);
 }
 //-------------------------------------------------------------
-//-----------------------------------------------редактор rnd--- изменяемые параметры---------------
+//-----------------------------------------------СЂРµРґР°РєС‚РѕСЂ rnd--- РёР·РјРµРЅСЏРµРјС‹Рµ РїР°СЂР°РјРµС‚СЂС‹---------------
 char rndgen[33];
 void drawrandom(void)
 {
@@ -1931,7 +1932,7 @@ void drawrandom(void)
 		gx = 0;
 	if (abs(gx) > 5)
 		gx = xtmp;
-	xtmp = gx;	// ускорение
+	xtmp = gx;	// СѓСЃРєРѕСЂРµРЅРёРµ
 	lev = abs(rndgen[i]);
 	if ((lev += gx) < 0)
 		lev = 126;	//select column
@@ -2051,7 +2052,7 @@ void drawfilelist(MSG n)
 		t = play;
 		newbpm();
 		restartbuf();
-		play = true;	//// воспроизводим как только загружаем файл
+		play = true;	//// РІРѕСЃРїСЂРѕРёР·РІРѕРґРёРј РєР°Рє С‚РѕР»СЊРєРѕ Р·Р°РіСЂСѓР¶Р°РµРј С„Р°Р№Р»
 		mode = 6;
 	}
 	fire = false;
@@ -2604,6 +2605,80 @@ void exporth(void)
 	CloseHandle(hFile);
 }
 
+
+//---------------------------------------------------------------------------------------------
+void exportgl(void)
+{
+	wchar_t ttt[300];
+	char ccc[10], sss[10000];
+
+	HANDLE hFile;
+	DWORD dwNumberOfBytesRead;
+	wavhdr.freq = frequency;
+	wavhdr.Bytespersecond = (frequency * stereo * (bits / 8));
+	play = false;
+	waveOutReset(hWaveOut);
+	playseq = 0;
+	index = 0;
+	memset(&string, 0, sizeof(string));
+	notenum = 0;
+	ULONG size = 0;
+	wcscpy(ttt, editfile);
+	wcscat(ttt, L".gl");
+	hFile = CreateFile(ttt, GENERIC_READ + GENERIC_WRITE, FILE_SHARE_READ + FILE_SHARE_WRITE, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (hFile)
+	{
+
+
+//const char patterns ARRAY 
+
+
+		sprintf(sss, "#define char int\r\n #define ARRAY []=char[](\r\n #define bpm %i.\r\n #define tracks %i\r\n #define trackLen %i\r\n #define instrNums %i\r\n ", abs(bpm), maxtrack+1, maxseq, maxinstr);
+		WriteFile(hFile, &sss, strlen(sss), &dwNumberOfBytesRead, NULL);
+		strcpy(sss, "const char patterns ARRAY ");
+		for (int t = 0; t < maxpatnames; t++)
+		{
+			for (int i = 0; i <= 15; i++)
+			{
+				sprintf(ccc, "%i,", patterns[t].p[i]);
+				strcat(sss, ccc);
+			} sss[strlen(sss) - 1] = 0;
+			strcat(sss, " , ");
+		}
+		sss[strlen(sss) - 2] = 0;
+		strcat(sss, ");\r\n");
+		WriteFile(hFile, &sss, strlen(sss), &dwNumberOfBytesRead, NULL);
+		strcpy(sss, "const char seqPat ARRAY ");
+		for (int t = 0; t <= maxseq; t++)
+		{
+			for (int i = 0; i <= maxtrack; i++)
+			{
+				sprintf(ccc, "%i,", seq[t][i]);
+				strcat(sss, ccc);
+			} sss[strlen(sss) - 1] = 0;
+			strcat(sss, " , ");
+		}
+		sss[strlen(sss) - 2] = 0;
+		strcat(sss, ");\r\n");
+		WriteFile(hFile, &sss, strlen(sss), &dwNumberOfBytesRead, NULL);
+		strcpy(sss, " const char instr ARRAY ");
+		for (int t = 0; t < maxinstr; t++)
+		{
+			for (int i = 0; i <= 15; i++)
+			{
+				sprintf(ccc, "%i,", instr[t].p[i]);
+				strcat(sss, ccc);
+			} sss[strlen(sss) - 1] = 0;
+			strcat(sss, " , ");
+		}
+		sss[strlen(sss) - 2] = 0;
+		strcat(sss, ");\r\n");
+		WriteFile(hFile, &sss, strlen(sss), &dwNumberOfBytesRead, NULL);
+	}
+	CloseHandle(hFile);
+}
+
+
 //----------------------------------------------------------------------
 void exportwav(void)
 {
@@ -2762,6 +2837,8 @@ void drawfiles(MSG m)
 			mergezm4(0);
 		if (keysel == 7)
 			exporth();
+		if (keysel == 7)
+			exportgl();
 		if (keysel == 8)
 			mode = 18;
 		if (keysel == 9)
@@ -2782,7 +2859,7 @@ void drawfiles(MSG m)
 			exportwav();
 	}
 	fire = FALSE;
-}	//-----------------------------------показывает меню---------------------------------------
+}	//-----------------------------------РїРѕРєР°Р·С‹РІР°РµС‚ РјРµРЅСЋ---------------------------------------
 void showmnu(int z)
 {
 	int t = mnurows[z];
